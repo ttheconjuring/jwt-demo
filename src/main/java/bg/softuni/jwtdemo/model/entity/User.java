@@ -1,5 +1,6 @@
-package bg.softuni.jwtdemo.model;
+package bg.softuni.jwtdemo.model.entity;
 
+import bg.softuni.jwtdemo.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

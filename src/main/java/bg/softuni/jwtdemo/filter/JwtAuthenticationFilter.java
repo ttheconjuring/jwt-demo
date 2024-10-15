@@ -1,7 +1,7 @@
 package bg.softuni.jwtdemo.filter;
 
-import bg.softuni.jwtdemo.service.JwtService;
-import bg.softuni.jwtdemo.service.UserDetailsServiceImpl;
+import bg.softuni.jwtdemo.service.impl.JwtServiceImpl;
+import bg.softuni.jwtdemo.service.impl.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtServiceImpl;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Override
@@ -35,10 +35,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         String token = authHeader.substring(7);
-        String username = this.jwtService.extractUsername(token);
+        String username = this.jwtServiceImpl.extractUsername(token);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(username);
-            if (this.jwtService.isValid(token, userDetails)) {
+            if (this.jwtServiceImpl.isValid(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

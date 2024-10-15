@@ -1,6 +1,6 @@
 package bg.softuni.jwtdemo.repository;
 
-import bg.softuni.jwtdemo.model.User;
+import bg.softuni.jwtdemo.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

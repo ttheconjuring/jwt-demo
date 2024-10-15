@@ -1,7 +1,13 @@
-package bg.softuni.jwtdemo.service;
+package bg.softuni.jwtdemo.service.impl;
 
-import bg.softuni.jwtdemo.model.*;
+import bg.softuni.jwtdemo.model.dto.AuthenticationRequest;
+import bg.softuni.jwtdemo.model.dto.AuthenticationResponse;
+import bg.softuni.jwtdemo.model.dto.RegisterRequest;
+import bg.softuni.jwtdemo.model.entity.User;
+import bg.softuni.jwtdemo.model.enums.Role;
 import bg.softuni.jwtdemo.repository.UserRepository;
+import bg.softuni.jwtdemo.service.AuthenticationService;
+import bg.softuni.jwtdemo.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,13 +16,14 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class AuthenticationServiceImpl {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    @Override
     public AuthenticationResponse register(RegisterRequest request) {
         User user = User.builder()
                 .firstName(request.getFirstName())
@@ -30,6 +37,7 @@ public class AuthenticationServiceImpl {
         return new AuthenticationResponse(token);
     }
 
+    @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));

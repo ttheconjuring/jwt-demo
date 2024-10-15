@@ -1,4 +1,4 @@
-package bg.softuni.jwtdemo.service;
+package bg.softuni.jwtdemo.service.impl;
 
 import bg.softuni.jwtdemo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
