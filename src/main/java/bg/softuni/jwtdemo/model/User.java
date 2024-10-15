@@ -1,4 +1,4 @@
-package bg.softuni.jwtdemo.user;
+package bg.softuni.jwtdemo.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "first_name")
@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private String lastName;
 
     @Basic
-    private String email;
+    private String username;
 
     @Basic
     private String password;
@@ -46,7 +46,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.username;
     }
 
 }
